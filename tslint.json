@@ -1,0 +1,26 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "variable-name": [
+      "allow-leading-underscore",
+      "ban-keywords",
+      "check-format"
+    ],
+    "object-literal-key-quotes": [
+      false
+    ],
+    "align": [
+      false
+    ]
+  },
+  "rulesDirectory": [
+  ]
+}

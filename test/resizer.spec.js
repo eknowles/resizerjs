@@ -92,30 +92,30 @@ describe('methods', function () {
     removeContainers()
   })
 
-  describe('remove', function () {
+  describe('remove()', function () {
     beforeEach(function () {
-      rz.handleX = 10;
-      rz.remove();
+      rz.handleX = 10
+      rz.remove()
     })
 
     it('should remove the Resizer property from the container', function () {
       expect(rz.container.Resizer).toBeUndefined()
-    });
+    })
 
     it('should remove the contains style position', function () {
       expect(rz.container.style.position).toBeFalsy()
-    });
+    })
 
     it('should remove the handle element', function () {
       expect(rz.container.querySelector('[data-rz-handle]')).toBeNull()
-    });
+    })
 
     it('should reset the target flex value', function () {
       expect(rz.target.style.flex).toBeNull()
-    });
+    })
   })
 
-  describe('handleX', function () {
+  describe('setHandleX()', function () {
     it('should set the the ghost left position to handleX', function () {
       rz.setHandleX(clientWidth - 1)
       expect(rz.ghost.style.left).toEqual(clientWidth - 1 + 'px')
@@ -134,6 +134,29 @@ describe('methods', function () {
     it('should return value', function () {
       rz.setHandleX(1)
       expect(rz.handleX).toEqual(1)
+    })
+  })
+
+  describe('setDragging()', function () {
+    afterEach(function () {
+      rz.setHandleX(1)
+      rz.setDragging(false)
+    })
+
+    it('should not be dragging by default', function () {
+      expect(rz.setDragging()).toBeTruthy()
+      expect(rz.dragging).toBeTruthy()
+    })
+
+    it('should show ghost when dragging', function () {
+      expect(rz.setDragging()).toBeTruthy()
+      expect(rz.dragging).toBeTruthy()
+      expect(rz.ghost.style.display).toBe('block')
+    })
+
+    it('should hide ghost when not dragging', function () {
+      expect(rz.dragging).toBeFalsy()
+      expect(rz.ghost.style.display).toBe('none')
     })
   })
 })

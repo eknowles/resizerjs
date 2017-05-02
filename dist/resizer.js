@@ -7,7 +7,7 @@ var Resizer = function () {
         }
         this.containerSelector = containerSelector;
         this.offsetX = 0;
-        this._dragging = false;
+        this.dragging = false;
         if (!containerSelector) {
             throw new Error('Missing param containerSelector');
         }
@@ -67,22 +67,18 @@ var Resizer = function () {
         this.handle.appendChild(this.ghost);
         this.container.insertBefore(this.handle, this.target.nextElementSibling);
     };
-    Object.defineProperty(Resizer.prototype, "dragging", {
-        get: function () {
-            return this._dragging;
-        },
-        set: function (value) {
-            if (this.dragging) {
-                this.ghost.style.display = 'none';
-                this.target.style.flex = "0 0 " + this.handleX + "px";
-            } else {
-                this.ghost.style.display = 'block';
-            }
-            this._dragging = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    Resizer.prototype.setDragging = function (value) {
+        if (value === void 0) {
+            value = true;
+        }
+        if (this.dragging) {
+            this.ghost.style.display = 'none';
+            this.target.style.flex = "0 0 " + this.handleX + "px";
+        } else {
+            this.ghost.style.display = 'block';
+        }
+        return this.dragging = value;
+    };
     Resizer.prototype.setHandleX = function (value) {
         if (value < 0) {
             value = 0;
@@ -91,21 +87,21 @@ var Resizer = function () {
             value = this.container.clientWidth;
         }
         this.ghost.style.left = value + "px";
-        this.handleX = value;
+        return this.handleX = value;
     };
     Resizer.prototype.onDown = function (e) {
         e.preventDefault();
         if (!this.dragging) {
             this.offsetX = e.offsetX;
             this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
-            this.dragging = true;
+            this.setDragging();
         }
     };
     Resizer.prototype.onUp = function (e) {
         e.preventDefault();
         if (this.dragging) {
             this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
-            this.dragging = false;
+            this.setDragging(false);
         }
     };
     Resizer.prototype.onMove = function (e) {

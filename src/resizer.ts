@@ -131,7 +131,7 @@ class Resizer {
    * Handle is being dragged
    * @member {boolean} Resizer#dragging
    */
-  private _dragging: boolean = false;
+  private dragging: boolean = false;
 
   /**
    * Resizer constructor
@@ -176,7 +176,7 @@ class Resizer {
    * @public
    * @method Resizer#remove
    */
-  public remove() {
+  public remove(): void {
     delete this.container.Resizer;
     this.container.style.position = null;
     this.handle.remove();
@@ -187,7 +187,7 @@ class Resizer {
    * @private
    * @method Resizer#setup
    */
-  private setup() {
+  private setup(): void {
     this.setupDom();
 
     // Add events
@@ -203,7 +203,7 @@ class Resizer {
    * @private
    * @method Resizer#setupDom
    */
-  private setupDom() {
+  private setupDom(): void {
 
     // Set Container to relative positioning
     this.container.style.position = 'relative';
@@ -222,34 +222,25 @@ class Resizer {
   }
 
   /**
-   * Get the dragging value
-   * @private
-   * @return {boolean}
-   */
-  private get dragging(): boolean {
-    return this._dragging;
-  }
-
-  /**
    * Sets the dragging value
    * @private
    * @param value
    */
-  private set dragging(value: boolean) {
+  private setDragging(value: boolean = true): boolean {
     if (this.dragging) {
       this.ghost.style.display = 'none';
       this.target.style.flex = `0 0 ${this.handleX}px`;
     } else {
       this.ghost.style.display = 'block';
     }
-    this._dragging = value;
+    return this.dragging = value;
   }
 
   /**
    * Sets the handle X position value
    * @param {number} value
    */
-  private setHandleX(value: number) {
+  private setHandleX(value: number): number {
     if (value < 0) {
       value = 0;
     }
@@ -257,7 +248,7 @@ class Resizer {
       value = this.container.clientWidth;
     }
     this.ghost.style.left = `${value}px`;
-    this.handleX = value;
+    return this.handleX = value;
   }
 
   /**
@@ -266,12 +257,12 @@ class Resizer {
    * @method Resizer#onDown
    * @param {MouseEvent} e
    */
-  private onDown(e: MouseEvent) {
+  private onDown(e: MouseEvent): void {
     e.preventDefault();
     if (!this.dragging) {
       this.offsetX = e.offsetX;
       this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
-      this.dragging = true;
+      this.setDragging();
     }
   }
 
@@ -281,11 +272,11 @@ class Resizer {
    * @method Resizer#onUp
    * @param {MouseEvent} e
    */
-  private onUp(e: MouseEvent) {
+  private onUp(e: MouseEvent): void {
     e.preventDefault();
     if (this.dragging) {
       this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
-      this.dragging = false;
+      this.setDragging(false);
     }
   }
 
@@ -295,7 +286,7 @@ class Resizer {
    * @method Resizer#onMove
    * @param {MouseEvent} e
    */
-  private onMove(e: MouseEvent) {
+  private onMove(e: MouseEvent): void {
     e.preventDefault();
     if (this.dragging) {
       let x = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;

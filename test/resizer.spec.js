@@ -25,7 +25,7 @@ describe('constructor', function () {
 describe('static methods', function () {
 
   describe('createHandle()', function () {
-    let handleElement;
+    var handleElement;
 
     beforeAll(function () {
       handleElement = Resizer.createHandle('boo')
@@ -49,7 +49,7 @@ describe('static methods', function () {
   })
 
   describe('createGhost()', function () {
-    let ghost;
+    var ghost;
 
     beforeAll(function () {
       ghost = Resizer.createGhost()
@@ -84,7 +84,7 @@ describe('static methods', function () {
 describe('methods', function () {})
 
 describe('properties', function () {
-  let rz;
+  var rz;
   beforeEach(function () {
     createContainer()
   })
@@ -112,7 +112,7 @@ describe('properties', function () {
     })
 
     it('should set the width', function () {
-      let width = 10
+      var width = 10
       rz = new Resizer('.container', {width: width})
       expect(rz.options.width).toBe(width)
     })
@@ -120,13 +120,13 @@ describe('properties', function () {
 })
 
 function createContainer() {
-  let container = document.createElement('div')
+  var container = document.createElement('div')
   container.className = 'container'
 
-  let item1 = document.createElement('div')
+  var item1 = document.createElement('div')
   item1.className = 'item'
 
-  let item2 = document.createElement('div')
+  var item2 = document.createElement('div')
   item2.className = 'item'
 
   container.appendChild(item1)

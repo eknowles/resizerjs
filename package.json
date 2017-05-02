@@ -4,13 +4,18 @@
   "description": "",
   "main": "dist/resizer.js",
   "scripts": {
-    "start": "tsc",
+    "start": "tsc && babel dist -d dist",
     "test": "karma start ./karma.conf.js",
     "docs": "tsdoc"
   },
   "author": "Edward Knowles <mail@eknowles.com>",
   "license": "ISC",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
+    "core-js": "^2.4.1",
     "coveralls": "^2.13.1",
     "gh-pages": "^0.12.0",
     "jasmine-core": "^2.6.1",
@@ -22,6 +27,7 @@
     "karma-coverage": "^1.1.1",
     "karma-coveralls": "^1.1.2",
     "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "0.0.31",
     "tsdoc": "0.0.4",
     "typescript": "^2.3.2",

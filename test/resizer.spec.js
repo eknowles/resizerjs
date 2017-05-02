@@ -1,5 +1,3 @@
-'use strict'
-
 describe('constructor', function () {
   beforeEach(function () {
     createContainer()
@@ -15,7 +13,7 @@ describe('constructor', function () {
     }).toThrowError()
   })
 
-  it('should setup a resizer with the id of test', function () {
+  it('should init a resizer with the css selector of .container', function () {
     expect(function () {
       return new Resizer('.container')
     }).not.toThrowError()

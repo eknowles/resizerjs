@@ -145,9 +145,11 @@ class Resizer {
 
     this.target = this.container.firstElementChild as HTMLElement;
 
-    if (!this.container.Resizer) {
-      this.setup();
+    if (this.container.Resizer) {
+      this.remove();
     }
+
+    this.setup();
 
   }
 
@@ -159,7 +161,6 @@ class Resizer {
   public remove() {
     delete this.container.Resizer;
     this.container.style.position = null;
-    this.ghost.remove();
     this.handle.remove();
     this.target.style.flex = null;
   }
@@ -260,7 +261,7 @@ class Resizer {
     e.preventDefault();
     if (!this.dragging) {
       this.offsetX = e.offsetX;
-      this.handleX = e.screenX - this.container.getBoundingClientRect().left - this.offsetX;
+      this.handleX = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
       this.dragging = true;
     }
   }
@@ -274,7 +275,7 @@ class Resizer {
   private onUp(e: MouseEvent) {
     e.preventDefault();
     if (this.dragging) {
-      this.handleX = e.screenX - this.container.getBoundingClientRect().left - this.offsetX;
+      this.handleX = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
       this.dragging = false;
     }
   }
@@ -288,7 +289,7 @@ class Resizer {
   private onMove(e: MouseEvent) {
     e.preventDefault();
     if (this.dragging) {
-      let x = e.screenX - this.container.getBoundingClientRect().left - this.offsetX;
+      let x = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
       if (e.shiftKey) {
         x = Math.ceil(x / 20) * 20;
       }

@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/resizer.js",
   "scripts": {
+    "start": "tsc",
     "test": "karma start ./karma.conf.js",
     "docs": "tsdoc"
   },

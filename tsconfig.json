@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "module": "amd",
-    "removeComments": true,
     "target": "es5",
+    "removeComments": true,
     "sourceMap": true,
+    "rootDir": "./src",
     "outDir": "./dist",
     "lib": [
       "dom",

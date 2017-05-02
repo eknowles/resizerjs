@@ -13,10 +13,26 @@ describe('constructor', function () {
     }).toThrowError()
   })
 
+  it('should throw an error when it can not find the css selection', function () {
+    expect(function () {
+      return new Resizer('unknown')
+    }).toThrowError()
+  })
+
   it('should init a resizer with the css selector of .container', function () {
     expect(function () {
       return new Resizer('.container')
     }).not.toThrowError()
+  })
+
+  it('should init a resizer with a element selection', function () {
+    const container = document.querySelector('.container')
+    var rz = new Resizer(container)
+    expect(rz.container).toEqual(container)
+  })
+
+  it('should remove itself if it already has been init', function () {
+    // TODO
   })
 })
 
@@ -167,7 +183,7 @@ describe('methods', function () {
       evt = {
         preventDefault: function () {},
         pageX: 10,
-        offsetX: 20,
+        offsetX: 2,
         shiftKey: true
       }
     })
@@ -220,7 +236,32 @@ describe('methods', function () {
     })
 
     describe('onMove()', function () {
+      beforeEach(function () {
+        evt.pageX = 0
+      })
 
+      beforeEach(function () {
+        rz.setDragging(true)
+      })
+
+      it('should prevent default on the event', function () {
+        spyOn(evt, 'preventDefault')
+        rz.onMove(evt)
+        expect(evt.preventDefault).toHaveBeenCalled()
+      })
+
+      it('should set handleX position', function () {
+        spyOn(rz, 'setHandleX')
+        rz.onMove(evt)
+        expect(rz.setHandleX).toHaveBeenCalled()
+      })
+
+      it('should not set handleX position when not being dragged', function () {
+        rz.dragging = false
+        spyOn(rz, 'setHandleX')
+        rz.onMove(evt)
+        expect(rz.setHandleX).not.toHaveBeenCalled()
+      })
     })
   })
 })

@@ -179,7 +179,7 @@ class Resizer {
   public remove(): void {
     delete this.container.Resizer;
     this.container.style.position = null;
-    this.handle.remove();
+    this.container.querySelector('[data-rz-handle]').remove();
     this.target.style.flex = null;
   }
 

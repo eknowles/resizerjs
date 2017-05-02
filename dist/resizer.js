@@ -43,7 +43,7 @@ var Resizer = function () {
     Resizer.prototype.remove = function () {
         delete this.container.Resizer;
         this.container.style.position = null;
-        this.handle.remove();
+        this.container.querySelector('[data-rz-handle]').remove();
         this.target.style.flex = null;
     };
     Resizer.prototype.setup = function () {

@@ -1,8 +1,8 @@
 {
   "name": "resizerjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/resizer.js",
+  "version": "0.0.0",
+  "description": "Handle custom resizing of flex box elements like a boss",
+  "main": "./dist/resizer.js",
   "scripts": {
     "start": "tsc && babel dist -d dist",
     "test": "karma start ./karma.conf.js",

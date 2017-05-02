@@ -1,24 +1,16 @@
 # Resizer.js
 
-[![Build Status](https://travis-ci.org/eknowles/resizerjs.svg?branch=master)](https://travis-ci.org/eknowles/resizerjs)
-[![Coverage Status](https://coveralls.io/repos/github/eknowles/resizerjs/badge.svg?branch=master)](https://coveralls.io/github/eknowles/resizerjs?branch=master)
-[![GitHub stars](https://img.shields.io/github/stars/eknowles/resizerjs.svg)](https://github.com/eknowles/resizerjs/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/eknowles/resizerjs.svg)](https://github.com/eknowles/resizerjs/issues)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/eknowles/resizerjs.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+[![Build Status](https://img.shields.io/travis/eknowles/resizerjs/master.svg?style=flat-square)](https://travis-ci.org/eknowles/resizerjs)
+[![Coveralls](https://img.shields.io/coveralls/jekyll/jekyll.svg?style=flat-square)](https://coveralls.io/github/eknowles/resizerjs?branch=master)
+[![NPM Version](https://img.shields.io/npm/v/resizerjs.svg?style=flat-square)](https://www.npmjs.com/package/resizerjs)
+[![NPM Downloads](https://img.shields.io/npm/dt/resizerjs.svg?style=flat-square)](https://www.npmjs.com/package/resizerjs)
+[![GitHub stars](https://img.shields.io/github/stars/eknowles/resizerjs.svg?style=flat-square)](https://github.com/eknowles/resizerjs/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/eknowles/resizerjs.svg?style=flat-square)](https://github.com/eknowles/resizerjs/issues)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/eknowles/resizerjs.svg?style=flat-square)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
 Resizer is a javascript library for handling custom resizing of flex box elements.
 
 This allows the user to drag a handle to resize the frame.
-
-# TODO
-
-- [X] snap by 20 px
-- [X] add tests
-- [ ] allow up down resizing
-- [ ] add coverage
-- [ ] add travis
-- [ ] add demo page
-- [ ] create npm
 
 ## Installation
 

@@ -25,10 +25,10 @@ describe('constructor', function () {
 describe('static methods', function () {
 
   describe('createHandle()', function () {
-    let handle;
+    let handleElement;
 
     beforeAll(function () {
-      handle = Resizer.createHandle('boo')
+      handleElement = Resizer.createHandle('boo')
     })
 
     it('should be defined', function () {
@@ -36,15 +36,15 @@ describe('static methods', function () {
     })
 
     it('should return a div', function () {
-      expect(handle.nodeName).toBe('DIV')
+      expect(handleElement.nodeName).toBe('DIV')
     })
 
     it('should have a cursor of ew-resize', function () {
-      expect(handle.style.cursor).toBe('ew-resize')
+      expect(handleElement.style.cursor).toBe('ew-resize')
     })
 
     it('should have an attribute of data-rz-handle', function () {
-      expect(handle.hasAttribute('data-rz-handle')).toBeTruthy()
+      expect(handleElement.hasAttribute('data-rz-handle')).toBeTruthy()
     })
   })
 

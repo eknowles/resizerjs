@@ -1,6 +1,6 @@
 [data-rz-handle] {
     flex: 0 0 6px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 [data-rz-handle] div {

@@ -9,12 +9,12 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'karma-typescript'],
+    frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
-      'src/*',
-      'spec/*.spec.js'
+      'dist/**/*.js',
+      'test/**/*.spec.js'
     ],
 
     // list of files to exclude
@@ -27,7 +27,6 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.ts': ['karma-typescript'],
       'dist/**/*.js': ['coverage']
     },
 
@@ -35,12 +34,6 @@ module.exports = function (config) {
     coverageReporter: {
       type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
       dir: 'coverage/'
-    },
-
-    karmaTypescriptConfig: {
-      bundlerOptions: {
-        transforms: [require('karma-typescript-es6-transform')()]
-      }
     },
 
     customLaunchers: {
@@ -53,7 +46,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'karma-typescript', 'coverage'],
+    reporters: ['progress', 'coverage'],
 
     // web server port
     port: 9876,

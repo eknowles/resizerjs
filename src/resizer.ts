@@ -37,6 +37,10 @@ interface IResizerOptions {
   className?: string;
 }
 
+const defaultOptions: IResizerOptions = {
+  width: 8,
+};
+
 /**
  * Resizer Class
  */
@@ -50,7 +54,7 @@ class Resizer {
    * @return {HTMLDivElement} handle element
    */
   private static createHandle(): HTMLDivElement {
-    const el = document.createElement('div');
+    const el = document.createElement('div') as HTMLDivElement;
     el.dataset.rzHandle = '';
     el.style.cursor = 'ew-resize';
     return el;
@@ -64,13 +68,19 @@ class Resizer {
    * @return {HTMLDivElement} ghost element
    */
   private static createGhost(): HTMLDivElement {
-    const el = document.createElement('div');
+    const el = document.createElement('div') as HTMLDivElement;
     el.style.position = 'absolute';
     el.style.top = '0';
     el.style.bottom = '0';
     el.style.display = 'none';
     return el;
   }
+
+  /**
+   * @public
+   * @member {IResizerOptions} Resizer#options
+   */
+  public options: IResizerOptions;
 
   /**
    * Container Element
@@ -123,15 +133,18 @@ class Resizer {
    * @class Resizer
    * @classdesc This class
    * @param {string | HTMLElement} containerSelector Document selector or element
-   * @param {IResizerOptions} options
+   * @param {IResizerOptions} resizerOptions
    */
   constructor(
     private containerSelector: string | HTMLElement,
-    private options?: IResizerOptions,
+    resizerOptions: IResizerOptions = {},
   ) {
     if (!containerSelector) {
       throw new Error('Missing param containerSelector');
     }
+
+    // setup options
+    this.options = Object.assign(defaultOptions, resizerOptions);
 
     if (typeof containerSelector === 'string') {
       this.container = document.querySelector(containerSelector) as HTMLElement;

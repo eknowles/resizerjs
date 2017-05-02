@@ -163,7 +163,7 @@ describe('methods', function () {
   describe('MouseEvent Methods', function () {
     var evt
     beforeAll(function () {
-      rz.dragging = false;
+      rz.setDragging(false)
       evt = {
         preventDefault: function () {},
         pageX: 10,
@@ -174,31 +174,49 @@ describe('methods', function () {
 
     describe('onDown()', function () {
       it('should prevent default on the event', function () {
-        spyOn(evt, 'preventDefault');
-        rz.onDown(evt);
+        spyOn(evt, 'preventDefault')
+        rz.onDown(evt)
         expect(evt.preventDefault).toHaveBeenCalled()
       })
 
       it('should set offsetX to event offsetX', function () {
-        rz.onDown(evt);
-        expect(rz.offsetX).toEqual(evt.offsetX);
+        rz.onDown(evt)
+        expect(rz.offsetX).toEqual(evt.offsetX)
       })
 
       it('should not change the offset when already dragging', function () {
-        rz.dragging = true;
-        rz.onDown(evt);
-        expect(rz.offsetX).toEqual(0);
+        rz.dragging = true
+        rz.onDown(evt)
+        expect(rz.offsetX).toEqual(0)
       })
 
       it('should set dragging to true when not dragging', function () {
         spyOn(rz, 'setDragging')
-        rz.onDown(evt);
+        rz.onDown(evt)
         expect(rz.setDragging).toHaveBeenCalledWith(true)
       })
     })
 
     describe('onUp()', function () {
+      beforeAll(function () {
+        evt.pageX = 20
+      })
 
+      beforeEach(function () {
+        rz.setDragging(true)
+      })
+
+      it('should prevent default on the event', function () {
+        spyOn(evt, 'preventDefault')
+        rz.onUp(evt)
+        expect(evt.preventDefault).toHaveBeenCalled()
+      })
+
+      it('should set dragging to false when dragging', function () {
+        spyOn(rz, 'setDragging')
+        rz.onUp(evt)
+        expect(rz.setDragging).toHaveBeenCalledWith(false)
+      })
     })
 
     describe('onMove()', function () {

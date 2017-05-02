@@ -23,7 +23,7 @@ describe('constructor', function () {
 describe('static methods', function () {
 
   describe('createHandle()', function () {
-    var handleElement;
+    var handleElement
 
     beforeAll(function () {
       handleElement = Resizer.createHandle('boo')
@@ -47,7 +47,7 @@ describe('static methods', function () {
   })
 
   describe('createGhost()', function () {
-    var ghost;
+    var ghost
 
     beforeAll(function () {
       ghost = Resizer.createGhost()
@@ -79,10 +79,44 @@ describe('static methods', function () {
   })
 })
 
-describe('methods', function () {})
+describe('methods', function () {
+  var rz, clientWidth
+
+  beforeEach(function () {
+    createContainer()
+    rz = new Resizer('.container')
+    clientWidth = rz.container.clientWidth
+  })
+
+  afterEach(function () {
+    removeContainers()
+  })
+
+  describe('handleX set', function () {
+    it('should set the the ghost left position to handleX', function () {
+      rz.handleX = clientWidth - 1
+      expect(rz.ghost.style.left).toEqual(clientWidth - 1 + 'px')
+    })
+
+    it('should be max width to the container client width', function () {
+      rz.handleX = clientWidth + 100
+      expect(rz.ghost.style.left).toEqual(clientWidth + 'px')
+    })
+
+    it('should not be able to set less than 0', function () {
+      rz.handleX = -100
+      expect(rz.ghost.style.left).toEqual('0px')
+    })
+
+    it('should return value', function () {
+      rz.handleX = 1
+      expect(rz.handleX).toEqual(1)
+    })
+  })
+})
 
 describe('properties', function () {
-  var rz;
+  var rz
   beforeEach(function () {
     createContainer()
   })

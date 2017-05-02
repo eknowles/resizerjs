@@ -1,6 +1,6 @@
 {
   "name": "resizerjs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Handle custom resizing of flex box elements like a boss",
   "main": "./dist/resizer.js",
   "scripts": {

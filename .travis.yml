@@ -10,3 +10,5 @@ before_script:
   - npm start
 script:
   - npm test
+after_script:
+  - 'cat coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls' # sends the coverage report to coveralls

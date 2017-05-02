@@ -92,24 +92,47 @@ describe('methods', function () {
     removeContainers()
   })
 
-  describe('handleX set', function () {
+  describe('remove', function () {
+    beforeEach(function () {
+      rz.handleX = 10;
+      rz.remove();
+    })
+
+    it('should remove the Resizer property from the container', function () {
+      expect(rz.container.Resizer).toBeUndefined()
+    });
+
+    it('should remove the contains style position', function () {
+      expect(rz.container.style.position).toBeFalsy()
+    });
+
+    it('should remove the handle element', function () {
+      expect(rz.container.querySelector('[data-rz-handle]')).toBeNull()
+    });
+
+    it('should reset the target flex value', function () {
+      expect(rz.target.style.flex).toBeNull()
+    });
+  })
+
+  describe('handleX', function () {
     it('should set the the ghost left position to handleX', function () {
-      rz.handleX = clientWidth - 1
+      rz.setHandleX(clientWidth - 1)
       expect(rz.ghost.style.left).toEqual(clientWidth - 1 + 'px')
     })
 
     it('should be max width to the container client width', function () {
-      rz.handleX = clientWidth + 100
+      rz.setHandleX(clientWidth + 100)
       expect(rz.ghost.style.left).toEqual(clientWidth + 'px')
     })
 
     it('should not be able to set less than 0', function () {
-      rz.handleX = -100
+      rz.setHandleX(-100)
       expect(rz.ghost.style.left).toEqual('0px')
     })
 
     it('should return value', function () {
-      rz.handleX = 1
+      rz.setHandleX(1)
       expect(rz.handleX).toEqual(1)
     })
   })

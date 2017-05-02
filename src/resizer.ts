@@ -125,7 +125,7 @@ class Resizer {
    * Current left value for the handle element in relation to it's parent (container)
    * @member {number} Resizer#handleX
    */
-  private _handleX: number;
+  private handleX: number;
 
   /**
    * Handle is being dragged
@@ -246,19 +246,10 @@ class Resizer {
   }
 
   /**
-   * Gets the handle X position value
-   * @private
-   * @return {number}
-   */
-  private get handleX(): number {
-    return this._handleX;
-  }
-
-  /**
    * Sets the handle X position value
    * @param {number} value
    */
-  private set handleX(value: number) {
+  private setHandleX(value: number) {
     if (value < 0) {
       value = 0;
     }
@@ -266,7 +257,7 @@ class Resizer {
       value = this.container.clientWidth;
     }
     this.ghost.style.left = `${value}px`;
-    this._handleX = value;
+    this.handleX = value;
   }
 
   /**
@@ -279,7 +270,7 @@ class Resizer {
     e.preventDefault();
     if (!this.dragging) {
       this.offsetX = e.offsetX;
-      this.handleX = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
+      this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
       this.dragging = true;
     }
   }
@@ -293,7 +284,7 @@ class Resizer {
   private onUp(e: MouseEvent) {
     e.preventDefault();
     if (this.dragging) {
-      this.handleX = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
+      this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
       this.dragging = false;
     }
   }
@@ -311,7 +302,7 @@ class Resizer {
       if (e.shiftKey) {
         x = Math.ceil(x / 20) * 20;
       }
-      this.handleX = x;
+      this.setHandleX(x);
     }
   }
 }

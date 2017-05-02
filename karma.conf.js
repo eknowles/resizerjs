@@ -2,7 +2,7 @@
 // Generated on Mon May 01 2017 18:48:53 GMT+0100 (BST)
 
 module.exports = function (config) {
-  config.set({
+  const configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -33,13 +33,20 @@ module.exports = function (config) {
 
     // optionally, configure the reporter
     coverageReporter: {
-      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
       dir: 'coverage/'
     },
 
     karmaTypescriptConfig: {
       bundlerOptions: {
         transforms: [require('karma-typescript-es6-transform')()]
+      }
+    },
+
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
       }
     },
 
@@ -72,5 +79,11 @@ module.exports = function (config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  }
+
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+
+  config.set(configuration)
 }

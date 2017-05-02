@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc && babel dist -d dist",
     "test": "karma start ./karma.conf.js",
+    "pretest": "npm start",
     "docs": "tsdoc"
   },
   "author": "Edward Knowles <mail@eknowles.com>",

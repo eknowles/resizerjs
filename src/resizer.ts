@@ -37,14 +37,19 @@ interface IResizerOptions {
   className?: string;
 }
 
-const defaultOptions: IResizerOptions = {
-  width: 8,
-};
-
 /**
  * Resizer Class
  */
 class Resizer {
+
+  /**
+   * Default Options
+   * @public
+   * @type {{width: number}}
+   */
+  public static defaultOptions: IResizerOptions = {
+    width: 8,
+  };
 
   /**
    * Create the Handle HTMLElement
@@ -144,7 +149,7 @@ class Resizer {
     }
 
     // setup options
-    this.options = Object.assign(defaultOptions, resizerOptions);
+    this.options = Object.assign(Resizer.defaultOptions, resizerOptions, {});
 
     if (typeof containerSelector === 'string') {
       this.container = document.querySelector(containerSelector) as HTMLElement;

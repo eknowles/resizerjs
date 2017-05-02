@@ -25,7 +25,7 @@ describe('constructor', function () {
 describe('static methods', function () {
 
   describe('createHandle()', function () {
-    var handle = void 0
+    let handle;
 
     beforeAll(function () {
       handle = Resizer.createHandle('boo')
@@ -49,7 +49,7 @@ describe('static methods', function () {
   })
 
   describe('createGhost()', function () {
-    var ghost = void 0
+    let ghost;
 
     beforeAll(function () {
       ghost = Resizer.createGhost()
@@ -84,7 +84,7 @@ describe('static methods', function () {
 describe('methods', function () {})
 
 describe('properties', function () {
-  var rz = void 0
+  let rz;
   beforeEach(function () {
     createContainer()
   })
@@ -106,8 +106,13 @@ describe('properties', function () {
   })
 
   describe('options', function () {
-    it('should have dragging property', function () {
-      var width = 10
+    it('defaults', function () {
+      expect(Resizer.defaultOptions.width).toBeDefined()
+      expect(Resizer.defaultOptions.width).toBe(8)
+    })
+
+    it('should set the width', function () {
+      let width = 10
       rz = new Resizer('.container', {width: width})
       expect(rz.options.width).toBe(width)
     })
@@ -115,13 +120,13 @@ describe('properties', function () {
 })
 
 function createContainer() {
-  var container = document.createElement('div')
+  let container = document.createElement('div')
   container.className = 'container'
 
-  var item1 = document.createElement('div')
+  let item1 = document.createElement('div')
   item1.className = 'item'
 
-  var item2 = document.createElement('div')
+  let item2 = document.createElement('div')
   item2.className = 'item'
 
   container.appendChild(item1)

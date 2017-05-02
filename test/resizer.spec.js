@@ -1,109 +1,113 @@
-describe('constructor', () => {
-  beforeEach(() => {
+'use strict'
+
+describe('constructor', function () {
+  beforeEach(function () {
     createContainer()
   })
 
-  afterEach(() => {
+  afterEach(function () {
     removeContainers()
   })
 
-  it('should throw an error when not given a first argument', () => {
-    expect(() => new Resizer()).toThrowError()
+  it('should throw an error when not given a first argument', function () {
+    expect(function () {
+      return new Resizer()
+    }).toThrowError()
   })
 
-  it('should setup a resizer with the id of test', () => {
-    expect(() => new Resizer('.container')).not.toThrowError()
+  it('should setup a resizer with the id of test', function () {
+    expect(function () {
+      return new Resizer('.container')
+    }).not.toThrowError()
   })
 })
 
-describe('static methods', () => {
+describe('static methods', function () {
 
-  describe('createHandle()', () => {
-    let handle
+  describe('createHandle()', function () {
+    var handle = void 0
 
-    beforeAll(() => {
+    beforeAll(function () {
       handle = Resizer.createHandle('boo')
     })
 
-    it('should be defined', () => {
+    it('should be defined', function () {
       expect(Resizer.createHandle).toBeDefined()
     })
 
-    it('should return a div', () => {
+    it('should return a div', function () {
       expect(handle.nodeName).toBe('DIV')
     })
 
-    it('should have a cursor of ew-resize', () => {
+    it('should have a cursor of ew-resize', function () {
       expect(handle.style.cursor).toBe('ew-resize')
     })
 
-    it('should have an attribute of data-rz-handle', () => {
+    it('should have an attribute of data-rz-handle', function () {
       expect(handle.hasAttribute('data-rz-handle')).toBeTruthy()
     })
   })
 
-  describe('createGhost()', () => {
-    let ghost
+  describe('createGhost()', function () {
+    var ghost = void 0
 
-    beforeAll(() => {
+    beforeAll(function () {
       ghost = Resizer.createGhost()
     })
 
-    it('should be defined', () => {
+    it('should be defined', function () {
       expect(Resizer.createGhost).toBeDefined()
     })
 
-    it('should return a div', () => {
+    it('should return a div', function () {
       expect(ghost.nodeName).toBe('DIV')
     })
 
-    it('should be absolutely positioned', () => {
+    it('should be absolutely positioned', function () {
       expect(ghost.style.position).toBe('absolute')
     })
 
-    it('should have a top position of 0', () => {
+    it('should have a top position of 0', function () {
       expect(ghost.style.top).toBe('0px')
     })
 
-    it('should have a bottom position of 0', () => {
+    it('should have a bottom position of 0', function () {
       expect(ghost.style.bottom).toBe('0px')
     })
 
-    it('should have a display style of none', () => {
+    it('should have a display style of none', function () {
       expect(ghost.style.display).toBe('none')
     })
   })
 })
 
-describe('methods', () => {
+describe('methods', function () {})
 
-})
-
-describe('properties', () => {
-  let rz
-  beforeEach(() => {
+describe('properties', function () {
+  var rz = void 0
+  beforeEach(function () {
     createContainer()
   })
 
-  afterEach(() => {
+  afterEach(function () {
     removeContainers()
   })
 
-  it('should have offsetX property', () => {
+  it('should have offsetX property', function () {
     rz = new Resizer('.container')
     expect(rz.offsetX).toBeDefined()
     expect(rz.offsetX).toBe(0)
   })
 
-  it('should have dragging property', () => {
+  it('should have dragging property', function () {
     rz = new Resizer('.container')
     expect(rz.dragging).toBeDefined()
     expect(rz.dragging).toBeFalsy()
   })
 
-  describe('options', () => {
-    it('should have dragging property', () => {
-      let width = 10
+  describe('options', function () {
+    it('should have dragging property', function () {
+      var width = 10
       rz = new Resizer('.container', {width: width})
       expect(rz.options.width).toBe(width)
     })
@@ -111,13 +115,13 @@ describe('properties', () => {
 })
 
 function createContainer() {
-  const container = document.createElement('div')
+  var container = document.createElement('div')
   container.className = 'container'
 
-  const item1 = document.createElement('div')
+  var item1 = document.createElement('div')
   item1.className = 'item'
 
-  const item2 = document.createElement('div')
+  var item2 = document.createElement('div')
   item2.className = 'item'
 
   container.appendChild(item1)

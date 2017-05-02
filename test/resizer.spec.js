@@ -159,6 +159,52 @@ describe('methods', function () {
       expect(rz.ghost.style.display).toBe('none')
     })
   })
+
+  describe('MouseEvent Methods', function () {
+    var evt
+    beforeAll(function () {
+      rz.dragging = false;
+      evt = {
+        preventDefault: function () {},
+        pageX: 10,
+        offsetX: 20,
+        shiftKey: true
+      }
+    })
+
+    describe('onDown()', function () {
+      it('should prevent default on the event', function () {
+        spyOn(evt, 'preventDefault');
+        rz.onDown(evt);
+        expect(evt.preventDefault).toHaveBeenCalled()
+      })
+
+      it('should set offsetX to event offsetX', function () {
+        rz.onDown(evt);
+        expect(rz.offsetX).toEqual(evt.offsetX);
+      })
+
+      it('should not change the offset when already dragging', function () {
+        rz.dragging = true;
+        rz.onDown(evt);
+        expect(rz.offsetX).toEqual(0);
+      })
+
+      it('should set dragging to true when not dragging', function () {
+        spyOn(rz, 'setDragging')
+        rz.onDown(evt);
+        expect(rz.setDragging).toHaveBeenCalledWith(true)
+      })
+    })
+
+    describe('onUp()', function () {
+
+    })
+
+    describe('onMove()', function () {
+
+    })
+  })
 })
 
 describe('properties', function () {

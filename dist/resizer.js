@@ -94,7 +94,7 @@ var Resizer = function () {
         if (!this.dragging) {
             this.offsetX = e.offsetX;
             this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
-            this.setDragging();
+            this.setDragging(true);
         }
     };
     Resizer.prototype.onUp = function (e) {

@@ -52,15 +52,55 @@ class Resizer {
   };
 
   /**
+   * Removes a resizer by a container selector
+   * @public
+   * @static
+   * @method Resizer#removeBySelector
+   */
+  public static removeBySelector(input): void {
+    const container = Resizer.getElement(input) as IResizerElement;
+    if (container.hasOwnProperty('Resizer')) {
+      container.Resizer.remove();
+    } else {
+      throw new Error('Resizer doesn\'t exist on element');
+    }
+  }
+
+  /**
+   * Return an HTML
+   * @param {string | Element} input
+   * @return {IResizerElement} container
+   */
+  private static getElement(input: string | HTMLElement): IResizerElement {
+    let el;
+
+    if (!input) {
+      throw new Error('Missing param, should be an element or selector');
+    }
+
+    if (typeof input === 'string') {
+      el = document.querySelector(input) as HTMLElement;
+      if (!el) {
+        throw new Error(`Can not find element from selector ${input}`);
+      }
+    } else {
+      el = input;
+    }
+
+    return el;
+  }
+
+  /**
    * Create the Handle HTMLElement
    * @private
    * @static
    * @method Resizer#createHandle
+   * @param {string} handleClass A class name to be set on the handle
    * @return {HTMLDivElement} handle element
    */
-  private static createHandle(): HTMLDivElement {
+  private static createHandle(handleClass?: string): HTMLDivElement {
     const el = document.createElement('div') as HTMLDivElement;
-    el.dataset.rzHandle = '';
+    el.dataset.rzHandle = handleClass || '';
     el.style.cursor = 'ew-resize';
     return el;
   }
@@ -78,6 +118,7 @@ class Resizer {
     el.style.top = '0';
     el.style.bottom = '0';
     el.style.display = 'none';
+    el.style.zIndex = '99999';
     return el;
   }
 
@@ -142,25 +183,10 @@ class Resizer {
    */
   constructor(
     private containerSelector: string | HTMLElement,
-    resizerOptions: IResizerOptions = {},
+    private resizerOptions: IResizerOptions = {},
   ) {
-    if (!containerSelector) {
-      throw new Error('Missing param containerSelector');
-    }
-
-    // setup options
-    this.options = Object.assign(Resizer.defaultOptions, resizerOptions, {});
-
-    if (typeof containerSelector === 'string') {
-      this.container = document.querySelector(containerSelector) as HTMLElement;
-    } else {
-      this.container = containerSelector;
-    }
-
-    if (!this.container) {
-      throw new Error(`Can not find element from selector ${containerSelector}`);
-    }
-
+    this.options = Object.assign(Resizer.defaultOptions, this.resizerOptions, {});
+    this.container = Resizer.getElement(containerSelector);
     this.target = this.container.firstElementChild as HTMLElement;
 
     if (this.container.Resizer) {
@@ -168,7 +194,6 @@ class Resizer {
     }
 
     this.setup();
-
   }
 
   /**

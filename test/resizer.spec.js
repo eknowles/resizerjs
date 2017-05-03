@@ -40,9 +40,10 @@ describe('static methods', function () {
 
   describe('createHandle()', function () {
     var handleElement
+    var handleClass = 'myHandleClass'
 
     beforeAll(function () {
-      handleElement = Resizer.createHandle('boo')
+      handleElement = Resizer.createHandle(handleClass)
     })
 
     it('should be defined', function () {
@@ -59,6 +60,10 @@ describe('static methods', function () {
 
     it('should have an attribute of data-rz-handle', function () {
       expect(handleElement.hasAttribute('data-rz-handle')).toBeTruthy()
+    })
+
+    it('should have an attribute of data-rz-handle equal to ' + handleClass, function () {
+      expect(handleElement.dataset.rzHandle).toBe(handleClass)
     })
   })
 
@@ -79,6 +84,10 @@ describe('static methods', function () {
 
     it('should be absolutely positioned', function () {
       expect(ghost.style.position).toBe('absolute')
+    })
+
+    it('should be have a zIndex of above 9000!', function () {
+      expect(parseInt(ghost.style.zIndex)).toBeGreaterThan(9000)
     })
 
     it('should have a top position of 0', function () {

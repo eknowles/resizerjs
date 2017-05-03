@@ -6,11 +6,14 @@
   "scripts": {
     "start": "tsc && babel dist -d dist",
     "test": "karma start ./karma.conf.js",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run copy-src-dist",
+    "copy-src-dist": "cp ./src/index.html ./src/resizer.css ./dist/",
     "pretest": "npm start",
     "docs": "tsdoc"
   },
   "author": "Edward Knowles <mail@eknowles.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",

@@ -6,29 +6,43 @@ var Resizer = function () {
             resizerOptions = {};
         }
         this.containerSelector = containerSelector;
+        this.resizerOptions = resizerOptions;
         this.offsetX = 0;
         this.dragging = false;
-        if (!containerSelector) {
-            throw new Error('Missing param containerSelector');
-        }
-        this.options = _extends(Resizer.defaultOptions, resizerOptions, {});
-        if (typeof containerSelector === 'string') {
-            this.container = document.querySelector(containerSelector);
-        } else {
-            this.container = containerSelector;
-        }
-        if (!this.container) {
-            throw new Error("Can not find element from selector " + containerSelector);
-        }
+        this.options = _extends(Resizer.defaultOptions, this.resizerOptions, {});
+        this.container = Resizer.getElement(containerSelector);
         this.target = this.container.firstElementChild;
         if (this.container.Resizer) {
             this.remove();
         }
         this.setup();
     }
-    Resizer.createHandle = function () {
+    Resizer.removeBySelector = function (input) {
+        var container = Resizer.getElement(input);
+        if (container.hasOwnProperty('Resizer')) {
+            container.Resizer.remove();
+        } else {
+            throw new Error('Resizer doesn\'t exist on element');
+        }
+    };
+    Resizer.getElement = function (input) {
+        var el;
+        if (!input) {
+            throw new Error('Missing param, should be an element or selector');
+        }
+        if (typeof input === 'string') {
+            el = document.querySelector(input);
+            if (!el) {
+                throw new Error("Can not find element from selector " + input);
+            }
+        } else {
+            el = input;
+        }
+        return el;
+    };
+    Resizer.createHandle = function (handleClass) {
         var el = document.createElement('div');
-        el.dataset.rzHandle = '';
+        el.dataset.rzHandle = handleClass || '';
         el.style.cursor = 'ew-resize';
         return el;
     };
@@ -38,6 +52,7 @@ var Resizer = function () {
         el.style.top = '0';
         el.style.bottom = '0';
         el.style.display = 'none';
+        el.style.zIndex = '99999';
         return el;
     };
     Resizer.prototype.remove = function () {

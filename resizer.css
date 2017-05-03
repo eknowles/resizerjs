@@ -1,0 +1,9 @@
+[data-rz-handle] {
+    flex: 0 0 6px;
+    background-color: rgba(0, 0, 0, .75);
+}
+
+[data-rz-handle] div {
+    width: 6px;
+    background-color: rgba(0, 0, 0, .5);
+}

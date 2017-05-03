@@ -1,2 +1,9 @@
 /docs
 /test
+.babelrc
+.travis.yml
+.editorconfig
+karma.conf.js
+tslint.json
+tsdoc.json
+tsconfig.json

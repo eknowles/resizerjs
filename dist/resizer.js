@@ -105,23 +105,23 @@ var Resizer = function () {
         return this.handleX = value;
     };
     Resizer.prototype.onDown = function (e) {
-        e.preventDefault();
         if (!this.dragging) {
+            e.preventDefault();
             this.offsetX = e.offsetX;
             this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
             this.setDragging(true);
         }
     };
     Resizer.prototype.onUp = function (e) {
-        e.preventDefault();
         if (this.dragging) {
+            e.preventDefault();
             this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
             this.setDragging(false);
         }
     };
     Resizer.prototype.onMove = function (e) {
-        e.preventDefault();
         if (this.dragging) {
+            e.preventDefault();
             var x = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
             if (e.shiftKey) {
                 x = Math.ceil(x / 20) * 20;
@@ -129,9 +129,9 @@ var Resizer = function () {
             this.setHandleX(x);
         }
     };
+    Resizer.defaultOptions = {
+        width: 8
+    };
     return Resizer;
 }();
-Resizer.defaultOptions = {
-    width: 8
-};
 //# sourceMappingURL=resizer.js.map

@@ -12,7 +12,7 @@
     "pretest": "npm start",
     "docs": "tsdoc"
   },
-  "author": "Edward Knowles <mail@eknowles.com>",
+  "author": "Edward Knowles",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",

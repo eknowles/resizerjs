@@ -283,8 +283,8 @@ class Resizer {
    * @param {MouseEvent} e
    */
   private onDown(e: MouseEvent): void {
-    e.preventDefault();
     if (!this.dragging) {
+      e.preventDefault();
       this.offsetX = e.offsetX;
       this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
       this.setDragging(true);
@@ -298,8 +298,8 @@ class Resizer {
    * @param {MouseEvent} e
    */
   private onUp(e: MouseEvent): void {
-    e.preventDefault();
     if (this.dragging) {
+      e.preventDefault();
       this.setHandleX(e.pageX - this.container.getBoundingClientRect().left - this.offsetX);
       this.setDragging(false);
     }
@@ -312,8 +312,8 @@ class Resizer {
    * @param {MouseEvent} e
    */
   private onMove(e: MouseEvent): void {
-    e.preventDefault();
     if (this.dragging) {
+      e.preventDefault();
       let x = e.pageX - this.container.getBoundingClientRect().left - this.offsetX;
       if (e.shiftKey) {
         x = Math.ceil(x / 20) * 20;
